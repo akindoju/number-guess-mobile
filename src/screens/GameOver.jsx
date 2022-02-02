@@ -1,5 +1,6 @@
 import { StyleSheet, View, Button, Image, Text } from "react-native";
 import BodyText from "../components/BodyText";
+import MainButton from "../components/MainButton";
 import Colors from "../constants/colors";
 
 const GameOver = ({ guessRounds, userNumber, newGameHandler }) => {
@@ -21,7 +22,7 @@ const GameOver = ({ guessRounds, userNumber, newGameHandler }) => {
         </BodyText>
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="New Game" onPress={newGameHandler} />
+        <MainButton onPress={newGameHandler}>New Game</MainButton>
       </View>
     </View>
   );

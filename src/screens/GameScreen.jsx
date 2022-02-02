@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect } from "react";
-import { Text, StyleSheet, View, Button, Alert } from "react-native";
-import BodyText from "../components/BodyText";
 import Card from "../components/Card";
+import { Ionicons } from "@expo/vector-icons";
+import MainButton from "../components/MainButton";
+import { useState, useRef, useEffect } from "react";
 import NumberComponent from "../components/NumberComponent";
+import { Text, StyleSheet, View, Alert } from "react-native";
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min); //round up number if decimal
@@ -60,11 +61,12 @@ const GameScreen = ({ userChoice, onGameOver }) => {
       <Text style={styles.text}>Computer's Guess</Text>
       <NumberComponent>{currentGuess}</NumberComponent>
       <Card style={styles.buttonContainer}>
-        <Button title="Lower" onPress={nextGuessHandler.bind(this, "lower")} />
-        <Button
-          title="Higher"
-          onPress={nextGuessHandler.bind(this, "higher")}
-        />
+        <MainButton onPress={nextGuessHandler.bind(this, "lower")}>
+          <Ionicons name="md-remove" size={24} color="white" />
+        </MainButton>
+        <MainButton onPress={nextGuessHandler.bind(this, "higher")}>
+          <Ionicons name="md-add" size={24} color="white" />
+        </MainButton>
       </Card>
     </View>
   );
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
 
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     marginTop: 20,
     width: 300,
     maxWidth: "80%",
