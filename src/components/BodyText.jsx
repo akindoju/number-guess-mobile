@@ -5,7 +5,7 @@ const BodyText = ({ children }) => {
 };
 
 const styles = StyleSheet.create({
-  text: { fontFamily: "lexendDeca" },
+  text: { fontFamily: "lexendDeca", textAlign: "center" },
 });
 
 export default BodyText;
