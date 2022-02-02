@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Text, StyleSheet, View, Button, Alert } from "react-native";
+import BodyText from "../components/BodyText";
 import Card from "../components/Card";
 import NumberComponent from "../components/NumberComponent";
 
@@ -79,6 +80,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     marginBottom: 10,
+    fontFamily: "lexendDeca",
   },
 
   buttonContainer: {

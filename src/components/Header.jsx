@@ -20,8 +20,9 @@ const styles = StyleSheet.create({
   },
 
   headerTitle: {
-    color: "black",
-    fontSize: 18,
+    color: "white",
+    fontSize: 20,
+    fontFamily: "lexendDecaBold",
   },
 });
 

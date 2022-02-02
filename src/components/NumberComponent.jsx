@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   number: {
     color: Colors.secondary,
     fontSize: 22,
+    fontFamily: "lexendDeca",
   },
 });
 
