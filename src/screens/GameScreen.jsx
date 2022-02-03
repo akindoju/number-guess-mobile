@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import MainButton from "../components/MainButton";
 import { useState, useRef, useEffect } from "react";
 import NumberComponent from "../components/NumberComponent";
-import { Text, StyleSheet, View, Alert } from "react-native";
+import { Text, StyleSheet, View, Alert, Dimensions } from "react-native";
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min); //round up number if decimal
@@ -21,6 +21,9 @@ const GameScreen = ({ userChoice, onGameOver }) => {
   const [currentGuess, setCurrentGuess] = useState(
     generateRandomBetween(1, 100, userChoice)
   );
+  const [availableDeviceHeight, setAvailableDeviceHeight] = useState(
+    Dimensions.get("window").height
+  );
   const [rounds, setRounds] = useState(0);
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
@@ -30,6 +33,18 @@ const GameScreen = ({ userChoice, onGameOver }) => {
       onGameOver(rounds);
     }
   }, [currentGuess, userChoice, onGameOver]);
+
+  useEffect(() => {
+    const updateLayout = () => {
+      setAvailableDeviceHeight(Dimensions.get("window").height);
+    };
+
+    Dimensions.addEventListener("change", updateLayout);
+
+    return () => {
+      Dimensions.removeEventListener("change", updateLayout);
+    };
+  });
 
   const nextGuessHandler = (direction) => {
     if (
@@ -55,6 +70,23 @@ const GameScreen = ({ userChoice, onGameOver }) => {
     setCurrentGuess(nextNumber);
     setRounds((curRounds) => curRounds + 1);
   };
+
+  if (availableDeviceHeight < 500) {
+    return (
+      <View style={styles.screen}>
+        <Text style={styles.text}>Computer's Guess</Text>
+        <View style={styles.controls}>
+          <MainButton onPress={nextGuessHandler.bind(this, "lower")}>
+            <Ionicons name="md-remove" size={24} color="white" />
+          </MainButton>
+          <NumberComponent>{currentGuess}</NumberComponent>
+          <MainButton onPress={nextGuessHandler.bind(this, "higher")}>
+            <Ionicons name="md-add" size={24} color="white" />
+          </MainButton>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.screen}>
@@ -91,6 +123,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 300,
     maxWidth: "80%",
+  },
+
+  controls: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "80%",
   },
 });
 
