@@ -4,7 +4,7 @@ import AppLoading from "expo-app-loading";
 import Header from "./src/components/Header";
 import GameOver from "./src/screens/GameOver";
 import GameScreen from "./src/screens/GameScreen";
-import { StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import StartGameScreen from "./src/screens/StartGameScreen";
 
 const fetchFonts = () => {
@@ -59,10 +59,10 @@ const App = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header title="Guess a Number" />
       {content}
-    </View>
+    </SafeAreaView>
   );
 };
 
